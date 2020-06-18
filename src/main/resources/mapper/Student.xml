@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.javaee.homework_system.dao.StudentDAO">
+    <select id="findAll" parameterType="com.javaee.homework_system.model.Student"
+            resultType="com.javaee.homework_system.model.SubmitHomework">
+        select * from submit_homework
+        where student_name=#{studentName}
+    </select>
+    <select id="listHomework" resultType="com.javaee.homework_system.model.Homework">
+        select * from homework
+    </select>
+    <select id="getHomework" parameterType="java.lang.Integer" resultType="com.javaee.homework_system.model.Homework">
+        select * from homework
+        where homework_id=#{id}
+    </select>
+    <select id="getSubmitHomework" resultType="com.javaee.homework_system.model.SubmitHomework">
+        select * from submit_homework
+        where homework_id = #{id}
+        and student_name=#{studentName}
+    </select>
+    <update id="editHomework" parameterType="com.javaee.homework_system.model.SubmitHomework">
+        update submit_homework set submit_content=#{submitContent},submit_time=#{submitTime}
+        where submit_homework.homework_title=#{homeworkTitle}
+        and submit_homework.homework_id=#{homeworkId}
+        and submit_homework.student_name=#{studentName}
+    </update>
+    <insert id="createSubmit" parameterType="com.javaee.homework_system.model.SubmitHomework">
+        insert into submit_homework(homework_id,homework_title,student_name,submit_content,submit_time)
+        values (#{homeworkId},#{homeworkTitle},#{studentName},#{submitContent},#{submitTime})
+    </insert>
+</mapper>

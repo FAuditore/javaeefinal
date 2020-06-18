@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.javaee.homework_system.dao.TeacherDAO">
+    <select id="findAll" parameterType="com.javaee.homework_system.model.Teacher" resultType="com.javaee.homework_system.model.SubmitHomework">
+        select * from submit_homework,homework
+        where submit_homework.homework_title = homework.homework_title
+        and homework.teacher_name=#{teacherName}
+    </select>
+    <select id="findAll2" parameterType="com.javaee.homework_system.model.Teacher" resultType="com.javaee.homework_system.model.Homework">
+        select * from homework
+        where homework.teacher_name=#{teacherName}
+    </select>
+    <insert id="setHomework" parameterType="com.javaee.homework_system.model.Homework">
+        insert into homework(teacher_name,homework_title,homework_content,create_time)
+        values(#{teacherName},#{homeworkTitle},#{homeworkContent},#{createTime})
+    </insert>
+</mapper>
